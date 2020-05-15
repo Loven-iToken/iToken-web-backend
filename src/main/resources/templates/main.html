@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>iToken | 首页</title>
+<link th:href="@{{Host}/plugins/nth-tabs/css/nth.tabs.css(Host = ${ResourceHost})}" rel="stylesheet">
+<div th:replace="header :: header"></div>
+<link href="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.css" rel="stylesheet">
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <div th:replace="/includes/navigate :: navigate"></div>
+    <div th:replace="/includes/menu :: menu"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="nth-tabs common-bg" id="editor-tabs"></div>
+    </div>
+
+    <div th:replace="CopyRight :: copyright"></div>
+</div>
+<!-- ./wrapper -->
+<div th:replace="footer :: footer"></div>
+<script th:src="@{{Host}/plugins/nth-tabs/js/nth.tabs.js(Host = ${ResourceHost})}"></script>
+<script src="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+<script th:src="@{{Host}/iToken/js/nth-tabs.js(Host = ${ResourceHost})}"></script>
+<script>
+    let gateway = 'http://localhost:9000/backend/';
+    function show(id) {
+        if(id === "btnPostsList"){
+            $("#btnPostsList").addClass('active');
+            $("#btnPostsForm").removeClass('active');
+            $("#btnUserForm").removeClass('active');
+            $("#btnUserList").removeClass('active');
+            NthTabs.addTab('posts_list', '用户列表', gateway + '/posts/list');
+        }
+        else if(id === "btnPostsForm"){
+            $("#btnPostsForm").addClass('active');
+            $("#btnPostsList").removeClass('active');
+            $("#btnUserForm").removeClass('active');
+            $("#btnUserList").removeClass('active');
+            NthTabs.addTab('posts_form', '用户增修', gateway + '/posts/form');
+        }
+        else if(id === "btnUserList"){
+            $("#btnUserList").addClass('active');
+            $("#btnUserForm").removeClass('active');
+            $("#btnPostsList").removeClass('active');
+            $("#btnPostsForm").removeClass('active');
+            NthTabs.addTab('user_list', '文章列表', gateway + '/user/list', true);
+        }
+        else if(id === "btnUserForm"){
+            $("#btnUserForm").addClass('active');
+            $("#btnPostsList").removeClass('active');
+            $("#btnPostsForm").removeClass('active');
+            $("#btnUserList").removeClass('active');
+            NthTabs.addTab('user_form', '文章增修', gateway + '/user/form', true);
+        }
+    }
+    $(function () {
+        NthTabs.home("/detail");
+    });
+</script>
+</body>
+</html>

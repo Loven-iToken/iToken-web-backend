@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: iToken-web-backend, iToken-baseconfig, iToken-common-web
+      label: master
+      profile: dev
+service:
+  sso_address: http://localhost:8502
